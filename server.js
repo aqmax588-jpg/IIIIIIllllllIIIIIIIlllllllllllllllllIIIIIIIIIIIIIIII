@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 const axios = require('axios')
+const https = require('https'); // 引入 https 模块
+
 const app = express()
 
 app.use(cors())
@@ -35,15 +37,9 @@ app.get('/user/:username', async (req, res) => {
   }
 })
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () => console.log('Running on', PORT))
 // ============================
-// Render 保活心跳 - 自动防休眠
-// 每 10 分钟访问一次前端 + API
-// 不影响登录、互踢、充值、查询任何功能
+// Render 双链接保活代码（直接生效）
 // ============================
-const https = require('https');
-
 const urls = [
   "https://iiiiiilllllliiiiiiillllllllllllllllliiii.onrender.com",
   "https://wallet-project-30bq.onrender.com/"
@@ -63,4 +59,7 @@ setInterval(() => {
       console.log("[保活失败] " + url + " → " + err.message);
     });
   });
-}, 10 * 60 * 1000);
+}, 10 * 60 * 1000); // 每10分钟访问一次
+
+const PORT = process.env.PORT || 3000
+app.listen(PORT, () => console.log('Running on', PORT))
