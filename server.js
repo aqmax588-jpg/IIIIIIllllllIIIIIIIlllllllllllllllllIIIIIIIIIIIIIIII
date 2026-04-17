@@ -38,7 +38,7 @@ app.get('/user/:username', async (req, res) => {
 })
 
 // ============================
-// Render 双链接保活代码（直接生效）
+// Render 双链接保活代码（带启动验证日志）
 // ============================
 const urls = [
   "https://iiiiiilllllliiiiiiillllllllllllllllliiii.onrender.com",
@@ -49,6 +49,9 @@ const urls = [
 process.on('uncaughtException', (err) => {
   console.log('保活过程中出现非致命错误:', err.message);
 });
+
+// 启动时立刻打印，验证保活模块是否加载
+console.log("✅ 保活模块已加载，10分钟后将开始心跳...");
 
 setInterval(() => {
   console.log("[保活] 开始心跳...");
