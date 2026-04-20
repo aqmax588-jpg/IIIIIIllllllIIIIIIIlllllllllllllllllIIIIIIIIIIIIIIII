@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
   res.send('Server running')
 })
 
-// TikTok 用户信息接口（原版完整保留）
+// 【原版完整保留】TikTok 用户信息接口（头像/粉丝/视频/关注数）
 app.get('/user/:username', async (req, res) => {
   const username = req.params.username
   try {
@@ -74,7 +74,7 @@ app.post('/api/login', (req, res) => {
 
   // 浏览器不匹配
   if (user.browser && user.browser !== fingerprint) {
-    return res.json({ ok: false, msg: '只能在首次登录的浏览器使用' })
+    return res.json({ ok: false, msg: '只能在首次登录的浏览器使用，请联系管理员解锁' })
   }
 
   res.json({ ok: true, token: user.token })
@@ -90,7 +90,7 @@ app.post('/api/check', (req, res) => {
 })
 
 // ======================
-// 管理端：解锁浏览器
+// 管理端解锁接口（和前端完全匹配）
 // ======================
 app.post('/api/admin/unlock', (req, res) => {
   const { username } = req.body
@@ -98,11 +98,11 @@ app.post('/api/admin/unlock', (req, res) => {
     return res.json({ ok: false, msg: '用户不存在' })
   }
   userDB[username].browser = null
-  res.json({ ok: true, msg: '解锁成功，可换浏览器登录' })
+  res.json({ ok: true, msg: '解锁成功，用户可换浏览器登录' })
 })
 
 // ======================
-// 保活逻辑（完整保留）
+// 保活逻辑（3个链接完整保留）
 // ======================
 const urls = [
   "https://iiiiiilllllliiiiiiillllllllllllllllliiii.onrender.com",
