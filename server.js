@@ -38,12 +38,14 @@ app.get('/user/:username', async (req, res) => {
 })
 
 // ============================
-// Render 三链接保活代码
+// Render 保活链接（已去重 + 补充你给的）
 // ============================
 const urls = [
   "https://iiiiiilllllliiiiiiillllllllllllllllliiii.onrender.com",
   "https://wallet-project-30bq.onrender.com/",
-  "https://wwwwwwwwwwwvvvvvvwwwwwwvvvvvwwwwvvww.onrender.com/"
+  "https://wwwwwwwwwwwvvvvvvwwwwwwvvvvvwwwwvvww.onrender.com/",
+  "https://wwwwwwwwwwwvvvvvvwwwwwwvvvvvwwwwvvww.onrender.com/admin.html",
+  "https://tk-proxy-2026.onrender.com"
 ];
 
 process.on('uncaughtException', (err) => {
