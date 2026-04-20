@@ -1,7 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const axios = require('axios')
-const https = require('https'); // 引入 https 模块
+const https = require('https');
 
 const app = express()
 
@@ -38,19 +38,18 @@ app.get('/user/:username', async (req, res) => {
 })
 
 // ============================
-// Render 双链接保活代码（带启动验证日志）
+// Render 三链接保活代码
 // ============================
 const urls = [
   "https://iiiiiilllllliiiiiiillllllllllllllllliiii.onrender.com",
-  "https://wallet-project-30bq.onrender.com/"
+  "https://wallet-project-30bq.onrender.com/",
+  "https://wwwwwwwwwwwvvvvvvwwwwwwvvvvvwwwwvvww.onrender.com/"
 ];
 
-// 防止保活请求出错导致进程崩溃
 process.on('uncaughtException', (err) => {
   console.log('保活过程中出现非致命错误:', err.message);
 });
 
-// 启动时立刻打印，验证保活模块是否加载
 console.log("✅ 保活模块已加载，10分钟后将开始心跳...");
 
 setInterval(() => {
@@ -62,7 +61,7 @@ setInterval(() => {
       console.log("[保活失败] " + url + " → " + err.message);
     });
   });
-}, 10 * 60 * 1000); // 每10分钟访问一次
+}, 10 * 60 * 1000);
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, () => console.log('Running on', PORT))
